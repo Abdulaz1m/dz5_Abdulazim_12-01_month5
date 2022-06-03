@@ -1,0 +1,24 @@
+.staff caption {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.staff table {
+    width: 800px;
+    border: 2px solid rgb(100, 100, 100);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    box-shadow: 0 0 5px;
+}
+
+td,
+th {
+    border: 1px solid rgb(100, 100, 100);
+    padding: 10px;
+    font-size: 16px;
+}
+
+th {
+    background-color: rgb(185, 185, 185);
+}
