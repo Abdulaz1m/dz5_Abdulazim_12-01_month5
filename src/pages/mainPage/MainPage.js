@@ -28,9 +28,11 @@ function MainPage(props) {
 
     const submit = (e) => {
         e.preventDefault();
+
         // 5дз)при создании 
         // пользователя если одно из полей пустое то 
         // выводить сообщение какое именно поле пустое
+        
         if (data.name === "") alert('заполните поля name');
         else if (data.lastName === "") alert('заполните поля lastName');
         else if (data.age === "") alert('заполните поля age');
