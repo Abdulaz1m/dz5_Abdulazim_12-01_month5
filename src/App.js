@@ -1,23 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import AboutPage from './pages/aboutPage/AboutPage';
-import ContactPage from './pages/contactsPage/ContactPage';
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 import MainPage from './pages/mainPage/MainPage';
-import NotFound from './pages/notFound/NotFound';
-import Staff from './pages/staff/Staff';
+import UsersPage from './pages/userPage/UsersPage';
+
 
 function App() {
-  return (
-    <div className='App' >
-        <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path='/staff' element={<Staff />} />
-          <Route path='/contact' element={<ContactPage />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-    </div>
-  );
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route index  element={<MainPage/>}/>
+                <Route path="/usersPage" element={<UsersPage/>}/>
+            </Routes>
+        </BrowserRouter>
+
+    )
 }
 
 export default App;

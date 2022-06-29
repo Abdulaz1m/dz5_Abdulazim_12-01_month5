@@ -1,26 +1,122 @@
-import React from 'react'
-import Footer from '../../components/footer/Footer'
-import Header from '../../components/header/Header'
+import React, { useState } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from "react-redux";
+import { createUserAction } from '../../redux/actions/actions';
 
-function MainPage() {
-  return (
-    <div>
-      <Header />
 
-      <div style={{ height: '500px' }}>
-        <h2>Main Page</h2>
-        <p>
-          Otherwise greatest friend norland introduced replying enjoy.
-          Company friend me recurred hills private wishing suspicion father proceed greatly taken family attention. Smallness preserved zealously resembled. Called others innate. Game still simple chiefly nothing face times loud doubt walls. Total again valley therefore precaution stanhill west spirit inhabit leave graceful felt unknown.
-          Father money times began boy curiosity pasture share celebrated securing how devonshire have pursuit surprise power. Enjoyed waited see father visitor excellence either you. Entirely joy lady hung still being advantage settling newspaper. Applauded warrant charmed be provided principle necessary unaffected expect part together peculiar manor observe admitted. Exeter weather doors collected fanny away do discourse hand weddings.
-          Addition really estate chiefly. Stand death delay felicity next visited. Chiefly three when distant scale life concerns rich scale. Meant husband certainty rooms assured hard unpleasant another lasting offence understood husband compact she cease doubt perhaps. Shewing each face six studied remarkably allowance myself amiable correct journey joy worth calling paid collecting.
-          Bringing trees addition both denied shortly fully moonlight depending narrow dried highly carriage lose. Six effects dissimilar described wondered myself lose connection hand themselves delicate matter. Placing been unpleasing cold. None amiable perceive vulgar securing deal sons told introduced learning difficult looking looking reached went. Woman each our hard.
-        </p>
-      </div>
+function MainPage(props) {
 
-      <Footer />
-    </div>
-  )
+    const dispatch = useDispatch();
+
+    const message = useSelector(state => state.message.status);
+    const text = useSelector(state => state.message.text);
+    const button = useSelector(state => state.message.button);
+
+    const [data, setData] = useState({
+        name: "",
+        lastName: "",
+        age: '',
+        email: ""
+    })
+
+    const onChangeInput = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const submit = (e) => {
+        e.preventDefault();
+        // 5дз)при создании 
+        // пользователя если одно из полей пустое то 
+        // выводить сообщение какое именно поле пустое
+        if (data.name === "") alert('заполните поля name');
+        else if (data.lastName === "") alert('заполните поля lastName');
+        else if (data.age === "") alert('заполните поля age');
+        else if (data.email === "") alert('заполните поля email');
+        else dispatch(createUserAction(data))
+    }
+
+    return (
+        <div className="container pt-5 pb-5">
+            <div className="row">
+                <div className="col-3">
+                    <Form.Group className="mb-3 w-100">
+                        <Form.Label className="w-100">Имя
+                            <Form.Control
+                                className="w-100"
+                                type="text"
+                                placeholder="Введите имя"
+                                name="name"
+                                onChange={onChangeInput}
+                                value={data.name}
+                            />
+                        </Form.Label>
+                    </Form.Group>
+                </div>
+
+                <div className="col-3">
+                    <Form.Group className="mb-3 w-100">
+                        <Form.Label className="w-100">Фамилия
+                            <Form.Control
+                                className="w-100"
+                                type="text"
+                                placeholder="Введите фамилию"
+                                name="lastName"
+                                onChange={onChangeInput}
+                                value={data.lastName}
+                            />
+                        </Form.Label>
+                    </Form.Group>
+                </div>
+
+                <div className="col-3">
+                    <Form.Group className="mb-3 w-100">
+                        <Form.Label className="w-100">Возраст
+                            <Form.Control
+                                className="w-100"
+                                type="number"
+                                placeholder="Введите возраст"
+                                name="age"
+                                onChange={onChangeInput}
+                                value={data.age}
+                            />
+                        </Form.Label>
+                    </Form.Group>
+                </div>
+
+                <div className="col-3">
+                    <Form.Group className="mb-3 w-100">
+                        <Form.Label className="w-100">Email
+                            <Form.Control
+                                className="w-100"
+                                type="email"
+                                placeholder="Введите email"
+                                name="email"
+                                onChange={onChangeInput}
+                                value={data.email}
+                            />
+                        </Form.Label>
+                    </Form.Group>
+                </div>
+
+                <div className="col-3 offset-9">
+                    <Button variant="primary" className="w-100" onClick={submit}>Создать</Button>
+                </div>
+
+
+                {
+                    message
+                    &&
+                    <Alert variant={button}>
+                        {text}
+                    </Alert>
+                }
+
+            </div>
+        </div>
+    );
 }
 
-export default MainPage
+export default MainPage;
